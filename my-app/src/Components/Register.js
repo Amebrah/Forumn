@@ -1,21 +1,22 @@
 import APIClient from '../Api/APIClient';
 import React, { useState } from "react";
-import { Grid, Button } from "@material-ui/core"
+import { Grid, Button, TextField } from "@material-ui/core"
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import './Styles/App.css';
+import { FormControl } from '@material-ui/core';
+import blue from '@material-ui/core/colors/blue';
 
 const theme = createMuiTheme({
   typography: {
     fontFamily: [
-      'Nunito',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif'
+      'Arial'
     ].join(','),
-  }
+  },
+  palette: {
+    primary: blue,
+  },
 });
+
 
 function Register() {
 
@@ -31,7 +32,7 @@ function Register() {
 
   return (
     <div>
-        <Grid container style = {{minHeight: '100vh'}}>
+        <Grid container style = {{minHeight: '100vh'}} spacing={0}  direction="column"  alignItems="center">
             <Grid item xs={12} sm={12}>
               <ThemeProvider theme={theme}>
                 <div className="Signing Up">
@@ -39,17 +40,13 @@ function Register() {
                 </div>
               </ThemeProvider>
                 <div className = "Creating Account">
-                    <form>
-                        <label>
-                        Username:
-                        <input type="text" name="name" onChange={e => { setUserName(e.target.value) }}/>
-                        Password:
-                        <input type="text" name="name" onChange={e => { setPassword(e.target.value) }}/>
-                        </label>
-                        <Button onClick={onSubmit}>
+                    <FormControl margin = "normal">
+                          <TextField label="Username" value = {username} onChange={e => { setUserName(e.target.value) }} spacing={4} />
+                          <TextField label="Password" value = {password} onChange={e => { setPassword(e.target.value) }} spacing={4}/>
+                        <Button onClick={onSubmit} variant="contained" component="span" spacing={4}>
                         Register
                         </Button>
-                    </form>
+                    </FormControl>
                 </div>
             </Grid>
         </Grid>

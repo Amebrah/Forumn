@@ -26,9 +26,20 @@ app.post('/createAccount', (req, res) => {
     connection.query(queryString, [req.body.username, req.body.password], function (err, result, fields) {
         if (err) throw err;
         if (result.length != 1) return res.send('Failed to Add'); 
-        console.log(result);
+        
       });
     return res.send('User added');
+});
+
+app.get('/login', (req, res) => {
+    const queryString = "SELECT * FROM userinfo WHERE username = ?, pass = ?"
+    console.log(req.body) 
+    //WHERE NOT EXISTS ( SELECT username FROM userinfo WHERE username = ?)
+    connection.query(queryString, [req.body.username, req.body.password], function (err, result, fields) {
+        if (err) throw err;
+        if (result.length != 1) return res.send('Incorrect Login'); 
+      });
+    return res.send('Logged In');
 });
 
 app.listen(8080, () => {
