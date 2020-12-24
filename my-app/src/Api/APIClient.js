@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export default class APIClient { 
+  //POST call to create an account
   static createAccount(user, pass) {
         axios
         .post('http://localhost:8080/createAccount', {
@@ -8,7 +9,6 @@ export default class APIClient {
           password: pass
         })
         .then(res => {
-          //console.log(`statusCode: ${res.statusCode}`)
           return res;
         })
         .catch(error => {
@@ -17,6 +17,7 @@ export default class APIClient {
         return null;
     }
 
+    //GET call to login
     static login(user, pass) {
       axios
       .get('http://localhost:8080/login', {
@@ -24,7 +25,6 @@ export default class APIClient {
         password: pass
       })
       .then(res => {
-        //console.log(`statusCode: ${res.statusCode}`)
         return res;
       })
       .catch(error => {

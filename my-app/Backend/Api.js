@@ -11,6 +11,8 @@ app.use(bodyParser.json())
 const mysql = require('mysql')
 var cors = require('cors')
 app.use(cors())
+
+//Connect sql
 var connection = mysql.createConnection({
         user: 'root',
         password: 'password',
@@ -19,6 +21,7 @@ var connection = mysql.createConnection({
         database: 'forumn'
 });
 
+//Create Account
 app.post('/createAccount', (req, res) => {
     const queryString = "INSERT INTO userinfo (username, pass) VALUES  (?, ?)"
     console.log(req.body) 
@@ -31,6 +34,7 @@ app.post('/createAccount', (req, res) => {
     return res.send('User added');
 });
 
+//Login
 app.get('/login', (req, res) => {
     const queryString = "SELECT * FROM userinfo WHERE username = ?, pass = ?"
     console.log(req.body) 
@@ -42,6 +46,7 @@ app.get('/login', (req, res) => {
     return res.send('Logged In');
 });
 
+//Listen on port 8080
 app.listen(8080, () => {
     console.log("Server is up and running on 8080")
 })
