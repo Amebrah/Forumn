@@ -21,26 +21,23 @@ var connection = mysql.createConnection({
         database: 'forumn'
 });
 
+//Check if username exists
+
 //Create Account
 app.post('/createAccount', (req, res) => {
-    const queryString = "INSERT INTO userinfo (username, pass) VALUES  (?, ?)"
-    console.log(req.body) 
-    //WHERE NOT EXISTS ( SELECT username FROM userinfo WHERE username = ?)
-    connection.query(queryString, [req.body.username, req.body.password], function (err, result, fields) {
-        if (err) throw err;
+    const queryString = "INSERT INTO userinfo (username, pass) SELECT * FROM (SELECT ?,?) AS tmp WHERE NOT EXISTS ( SELECT username FROM userinfo WHERE username = ?) LIMIT 1"
+    connection.query(queryString, [req.body.username, req.body.password, req.body.username], function (err, result, fields) {
+        if (err) return res.send('Failed to Add');
         if (result.length != 1) return res.send('Failed to Add'); 
-        
       });
     return res.send('User added');
 });
 
 //Login
 app.get('/login', (req, res) => {
-    const queryString = "SELECT * FROM userinfo WHERE username = ?, pass = ?"
-    console.log(req.body) 
-    //WHERE NOT EXISTS ( SELECT username FROM userinfo WHERE username = ?)
+    const queryString = "SELECT * FROM userinfo WHERE username = ? AND pass = ?"
     connection.query(queryString, [req.body.username, req.body.password], function (err, result, fields) {
-        if (err) throw err;
+        if (err) return res.send('Incorrect Login');
         if (result.length != 1) return res.send('Incorrect Login'); 
       });
     return res.send('Logged In');
