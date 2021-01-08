@@ -11,17 +11,22 @@ function Login() {
 
 	const [username, setUserName] = useState('');
 	const [password, setPassword] = useState('');
-  
+
   const onSubmit = (event) => {
     event.preventDefault();
-    const response = APIClient.login(username, password)
-    console.log(response)
+    APIClient.login(username, password).then((response) => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log('Error found when creating meeting');
+    })
 	};
 
 
   return (
     <div className="Login">
         <ThemeProvider theme={theme}>
+        
         <Box border = {1} borderRadius="borderRadius" width={1/4} alignItems="center" justify="center" color="secondary">
             <Grid container spacing={0}  direction="column"  alignItems="center">
               <Grid item xs={12} sm={12}>

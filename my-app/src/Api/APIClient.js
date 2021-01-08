@@ -2,35 +2,23 @@ import axios from 'axios';
 
 export default class APIClient { 
   //POST call to create an account
-  static createAccount(user, pass) {
-        axios
+  static async createAccount(user, pass) {
+        const response =  await  axios
         .post('http://localhost:8080/createAccount', {
           username: user,
           password: pass
         })
-        .then(res => {
-          return res;
-        })
-        .catch(error => {
-          console.error(error)
-        })
-        return null;
+        return  response.data;
     }
 
     //GET call to login
-    static login(user, pass) {
-      axios
+    static async login(user, pass) {
+      const response =  await axios
       .get('http://localhost:8080/login', {
         username: user,
         password: pass
       })
-      .then(res => {
-        return res;
-      })
-      .catch(error => {
-        console.error(error)
-      })
-      return null;
+      return  response.data;
   }
 
 }

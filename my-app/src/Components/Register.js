@@ -26,8 +26,12 @@ function Register() {
   
   const onSubmit = (event) => {
     event.preventDefault();
-    const response = APIClient.createAccount(username, password)
-    console.log(response)
+    APIClient.login(username, password).then((response) => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log('Error found when creating meeting');
+    })
 	};
 
 
