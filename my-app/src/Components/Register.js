@@ -26,7 +26,7 @@ function Register() {
   
   const onSubmit = (event) => {
     event.preventDefault();
-    APIClient.login(username, password).then((response) => {
+    APIClient.createAccount(username, password).then((response) => {
       console.log(response);
     })
     .catch(error => {

@@ -43,14 +43,14 @@ function Login() {
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  <Button component = {Link} to = "/Register" spacing={4} color = "secondary">
-                    Register
-                  </Button>
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                  <Button onClick={onSubmit} variant="contained" component="span" color = "primary">
+                <Button onClick={onSubmit} variant="contained" component="span" color = "primary">
                             Login
                             </Button>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                <Button component = {Link} to = "/Register" spacing={4} color = "secondary">
+                    Register
+                  </Button>
                 </Grid>
             </Grid>
           </Box>

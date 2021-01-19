@@ -31,7 +31,7 @@ app.post('/createAccount', (req, res) => {
         if (err) {
           throw err;
         }
-        if (result.length != 1)  {
+        if (result.affectedRows != 1)  {
           return res.send('Failed to Add'); 
         }
         else {
@@ -45,6 +45,7 @@ app.post('/createAccount', (req, res) => {
 app.get('/login', (req, res) => {
     const queryString = "SELECT * FROM userinfo WHERE username = ? AND pass = ?"
     connection.query(queryString, [req.body.username, req.body.password], function (err, result, fields) {
+
         if (err) {
           throw err;
         } 

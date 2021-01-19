@@ -13,6 +13,7 @@ export default class APIClient {
 
     //GET call to login
     static async login(user, pass) {
+      console.log(user);
       const response =  await axios
       .get('http://localhost:8080/login', {
         username: user,
