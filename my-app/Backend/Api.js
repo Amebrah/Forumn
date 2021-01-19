@@ -42,7 +42,7 @@ app.post('/createAccount', (req, res) => {
 });
 
 //Login
-app.get('/login', (req, res) => {
+app.post('/login', (req, res) => {
     const queryString = "SELECT * FROM userinfo WHERE username = ? AND pass = ?"
     connection.query(queryString, [req.body.username, req.body.password], function (err, result, fields) {
 
